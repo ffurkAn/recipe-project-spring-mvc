@@ -7,26 +7,33 @@
 <body>
 <H1>Simply Recipes</H1>
 
-<table th:each="recipe : ${recipes}">
+<div th:each="recipe : ${recipes}">
 
     <h2 th:text="${recipe.title}"></h2>
+    <p th:text="${recipe.getDescription()}"></p>
 
-    <tr>
-        <td th:text="${recipe.getDescription()}"></td>
-    </tr>
-
-    <tr th:each="category : ${recipe.getCategories()}">
-        <td th:text="${category.getDescription()}"></td>
-    </tr>
+    <div style="overflow: hidden;" >
+        <div th:each="category : ${recipe.getCategories()}">
+            <div style="float: left;">
+                <span th:text="${category.getDescription()}"></span> &nbsp;
+            </div>
+        </div>
+    </div>
 
     <h3>Ingredients</h3>
 
-    <tr th:each="ingredient : ${recipe.getIngredients()}">
-        <td th:text="${ingredient.getId()}">a</td>
-        <td th:text="${ingredient.getAmount()}">d</td>
-        <td th:text="${ingredient.getDescription()}">v</td>
-    </tr>
-</table>
+    <table >
+        <tr th:each="ingredient : ${recipe.getIngredients()}">
+            <!-- <td th:text="${ingredient.getId()}">a</td> -->
+            <td th:text="${ingredient.getAmount()}">d</td>
+            <td th:if="${ingredient.getUom()}" != null ? th:text="${ingredient.getUom().getUom()}"></td>
+            <td th:text="${ingredient.getDescription()}">v</td>
+        </tr>
+    </table>
+
+    <p th:text="${recipe.getNotes().getRecipeNotes()}"></p>
+
+</div>
 
 </body>
 </html>
