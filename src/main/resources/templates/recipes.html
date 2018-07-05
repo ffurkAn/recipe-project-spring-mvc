@@ -1,38 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Recipe Project</title>
+    <meta charset="UTF-8"/>
+    <title>Recipe Home</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<H1>Simply Recipes</H1>
 
-<div th:each="recipe : ${recipes}">
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
 
-    <h2 th:text="${recipe.title}"></h2>
-    <p th:text="${recipe.getDescription()}"></p>
-
-    <div style="overflow: hidden;" >
-        <div th:each="category : ${recipe.getCategories()}">
-            <div style="float: left;">
-                <span th:text="${category.getDescription()}"></span> &nbsp;
+                <div class="panel-heading">
+                    <h1 class="panel-title">My Recipes!</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Title
+                                </th>
+                            </tr>
+                            </thead>
+                            <tr th:each="recipe : ${recipes}">
+                                <td th:text="${recipe.id}">334</td>
+                                <td th:text="${recipe.title}">Tasty Goodnees 3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <h3>Ingredients</h3>
-
-    <table >
-        <tr th:each="ingredient : ${recipe.getIngredients()}">
-            <!-- <td th:text="${ingredient.getId()}">a</td> -->
-            <td th:text="${ingredient.getAmount()}">d</td>
-            <td th:if="${ingredient.getUom()}" != null ? th:text="${ingredient.getUom().getUom()}"></td>
-            <td th:text="${ingredient.getDescription()}">v</td>
-        </tr>
-    </table>
-
-    <p th:text="${recipe.getNotes().getRecipeNotes()}"></p>
-
 </div>
 
 </body>
