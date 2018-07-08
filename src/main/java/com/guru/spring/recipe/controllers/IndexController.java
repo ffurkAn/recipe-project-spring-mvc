@@ -27,6 +27,14 @@ public class IndexController {
         this.recipeService = recipeService;
     }
 
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
+    public IndexController(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
     @RequestMapping({"", "/", "/index"})
     public String getIndexPage() {
 
